@@ -27,6 +27,13 @@ def temp():
 
     return ret
 
+@app.route('/student/<id>')
+def student(id):
+    print(type(id))
+    print(id)
+    return "有趣的参数"
+
+
 if __name__ == '__main__':
     # app.run(debug=True,port=8000,host='0.0.0.0')
     manager.run()
