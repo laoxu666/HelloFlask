@@ -27,7 +27,7 @@ def temp():
 
     return ret
 
-@app.route('/student/<id>')
+@app.route('/student/<string:id>/')
 def student(id):
     print(type(id))
     print(id)
