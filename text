@@ -1,0 +1,135 @@
+# Flask
+
+
+### app.run()
+
+1. debug = True
+   - 进入调试模式
+   - 项目可以自动重新加载
+   - debugger会被激活
+     - 会提供一个pin
+     - 当程序crash的时候，可以在网页上输入pin进行调试
+2. port
+   - 指定端口
+3. host
+   - 指定运行的ip
+
+
+### 插件，扩展库
+
+1. 用来帮助开发者快速实现某些功能
+
+
+### flask-script
+
+- 使用了它实现了终端参数接收，运行项目
+- 使用流程
+  - 安装插件，安装扩展库
+  - 初始化插件，使用app对象进行Manager对象初始化
+  - 运行的时候，修改为Manager.run()
+- 使用方法
+  - shell
+    - 进入一个flask环境的终端
+  - runserver
+    - 运行服务器
+    - r  自动重新加载
+    - d debug模式
+    - p port端口
+    - h host主机
+
+
+### views
+
+1. 视图函数
+   - 协调模型和模板的关系
+   - 处理业务逻辑
+2. 和视图函数直接对接的是路由 route
+   - route可以接收请求
+   - 还可以接收请求参数
+     - 路径参数
+     - 语法<var>
+     - 原型语法 <converter: var>
+       - string   默认值，string中不能包含 / ，会把认为是路径分隔符
+       - int  限制输入的参数内容为 int 类型，如果不是类型则不能完成匹配
+       - float    限制输入参数内容为float类型
+       - path  接收到的数据类型是字符串，可以接收 /，会把／　认为是普通的字符
+       - uuid 限制输入数据类型为uuid（格式）类型，接收后会转换为uuid类型
+3. 反向解析 url_for
+   - 在flask中根据函数名获取 path
+   - 如果携带参数  url_for('函数', key=value)
+
+
+### 蓝图，蓝本
+
+- 本意是对美好事物的向往，规划
+- flask中蓝图代表的是对程序的一个美好规划，视图函数
+- 使用流程
+  - 下载，安装
+    - pip install flask-blueprint
+  - 初始化
+    - 创建blueprint对象，  blue =Blueprint('BlueName', \__name__)
+    - 注册蓝图，app.register_blueprint
+  - 使用
+    - 使用和app一致
+    - @blue.route()
+
+
+### Response
+
+1. content, code
+   - code 根据实际需要指定
+   - 要复合状态码规则
+   - 也可能用到反爬上
+2. render_template
+   - 使用完全同上
+   - Template()配合render(key=value, key1=value1)
+3. make_response
+   - 制作一个响应
+   - 返回的结果是Response的一个对象
+4. 直接实例化Response对象
+   - 最底层的方式
+5. 还可以使用重定向
+   - redirect(地址)
+   - url_for 反向解析获得
+6. 还可以返回json
+   - jsonify
+     - 支持直接的字典传输
+     - 构造使用key=value，key=value
+7. 还可以终止响应
+   - abort
+   - 只需传递终止的状态码
+
+
+
+### 爬虫
+
+1. 数据抓取
+2. 数据提取
+   - 提取正常请求的
+   - 状态码异常的通常不会提取
+3. 数据存储
+
+
+
+### 状态码
+
+1. 每次HttpRequest请求都会收到一个HttpResponse
+
+2. 每个HttpResponse都会携带一个对应的状态码
+
+   - 2xx
+
+     - 成功系列
+
+   - 3xx
+
+     - 转发，重定向
+
+   - 4xx
+
+     - 客户端错误
+
+   - 5xx
+
+     - 服务器错误
+     - 逻辑错了
