@@ -27,7 +27,12 @@ def temp():
 
     return ret
 
-@app.route('/student/<string:id>/')
+#string 请求参数中不能带斜线/  默认为路径分隔符
+# @app.route('/student/<string:id>/')
+# @app.route('/student/<int:id>/')
+@app.route('/student/<path:id>/')
+# http://127.0.0.1:5000/student/100aaa/hehe/
+
 def student(id):
     print(type(id))
     print(id)
