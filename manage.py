@@ -1,6 +1,6 @@
 import uuid
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 # 安装驱动 pip install flask-script
 from flask_script import Manager
 
@@ -45,6 +45,24 @@ def get_uuid():
     return str(uuid.uuid4())
 
 # d8892d52-ffce-408c-9d55-59ee5cf1e448
+
+# any 群举 参数必须是： a b c 中的一个
+@app.route("/any/<any(a,b,c):an>/",methods=['GET','POST','DELETE'])
+def any(an):
+    print(an)
+    return 'Any'
+
+# 反向解析
+@app.route('/reverse/')
+def reverse():
+
+    result = url_for('temp')
+
+    print(url_for('any',an='b'))
+
+    print(result)
+
+    return "This is a 反向解析！"
 
 if __name__ == '__main__':
     # app.run(debug=True,port=8000,host='0.0.0.0')
